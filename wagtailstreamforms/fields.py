@@ -146,8 +146,9 @@ class HookSelectField(models.Field):
         }
         defaults.update(kwargs)
         return super().formfield(**defaults)
-
-    def from_db_value(self, value, expression, connection, context):
+    
+    # Removed context variable for Django 3.0
+    def from_db_value(self, value, expression, connection):
         if value is None or value == "":
             return []
         return value.split(",")
